@@ -27,6 +27,5 @@ public class TestController  extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println(StringUtils.isEmpty("123"));
-        System.out.println(StringUtils.isEmpty("123"));
     }
 }

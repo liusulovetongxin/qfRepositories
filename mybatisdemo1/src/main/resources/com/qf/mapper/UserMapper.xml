@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--要求整个映射文件记住-->
+<!--namespace要是接口文件的全限定名称-->
+<mapper namespace="com.qf.mapper.UserMapper">
+    <!--查询用户表所有数据-->
+    <!--id是当前这个标签的唯一标识-->
+    <select id="findAll" resultType="com.qf.pojo.User" >
+        select * from t_users;
+    </select>
+    <select id="findById" resultType="com.qf.pojo.User" >
+        select * from t_users where id =#{id};
+    </select>
+    <select id="findLike" resultType="com.qf.pojo.User">
+        select * from t_users where name like %${name}%;
+--         select * from t_users where name like concat("%",#{name},"%");
+    </select>
+
+    <insert id="insertInto" parameterType="com.qf.pojo.User">
+        insert into t_users values(null,#{name},#{password},#{sex},#{birthday},#{registTime});
+    </insert>
+</mapper>

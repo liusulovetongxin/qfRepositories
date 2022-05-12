@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<!--MyBatis配置-->
+<configuration>
+    <properties resource="jdbc.properties" />
+
+    <!--JDBC环境配置、选中默认环境-->
+    <environments default="MySqlDB">
+        <!--MySql数据库环境配置-->
+        <environment id="MySqlDB">
+            <!--事务管理-->
+            <transactionManager type="JDBC"/>
+            <!--连接池-->
+            <dataSource type="org.apache.ibatis.datasource.pooled.PooledDataSourceFactory">
+                <property name="driver" value="${jdbc.driver}"/>
+                <!-- &转义&amp; -->
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <!--Mapper注册-->
+    <mappers>
+        <!--注册Mapper文件的所在位置-->
+        <mapper resource="com/qf/mapper/UserMapper.xml"/>
+        <mapper resource="com/qf/mapper/ProductMapper.xml"/>
+    </mappers>
+</configuration>

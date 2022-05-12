@@ -12,12 +12,39 @@
     <select id="findById" resultType="com.qf.pojo.User" >
         select * from t_users where id =#{id};
     </select>
+
     <select id="findLike" resultType="com.qf.pojo.User">
-        select * from t_users where name like %${name}%;
---         select * from t_users where name like concat("%",#{name},"%");
+        select * from t_users where name like '%${likeName}%';
+        <!--/*select * from t_users where name like concat("%",#{likeName},"%");*/-->
     </select>
 
-    <insert id="insertInto" parameterType="com.qf.pojo.User">
-        insert into t_users values(null,#{name},#{password},#{sex},#{birthday},#{registTime});
+    <insert id="insertInto">
+        /*after 是先执行sql语句，再执行selectkey
+          before是先执行selectkey，再执行别的SQL语句
+          */
+        <selectKey resultType="Integer" keyProperty="user.id" order="AFTER">
+            select last_insert_id();
+        </selectKey>
+        insert into t_users values(null,#{user.name},#{user.password},#{user.sex},#{user.birthday},#{user.registTime});
     </insert>
+    
+    <update id="updateUserById">
+        update t_users set name = #{user.name},sex = #{user.sex},password =#{user.password},registTime = #{user.registTime} where id = #{user.id};
+    </update>
+
+    <delete id="deleteById">
+        delete from t_users where id = #{id};
+    </delete>
+
+    <select id="selectByNameAndPwd" resultType="com.qf.pojo.User">
+        select * from t_users where name=#{name} and password = #{password};
+    </select>
+
+    <select id="selectByNameAndPwdMap" resultType="com.qf.pojo.User">
+        select * from t_users where name=#{myName} and password = #{myPassword};
+    </select>
+
+    <delete id="deleteByName">
+        delete from t_users where name like '%${name}%';
+    </delete>
 </mapper>

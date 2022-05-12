@@ -4,8 +4,15 @@
 
 <!--MyBatis配置-->
 <configuration>
+    <!--数据库配置-->
     <properties resource="jdbc.properties" />
-
+    <!--别名不推荐使用，不方便切换-->
+<!--    <typeAliases>-->
+        <!--给单个配置别名-->
+<!--        <typeAlias type="com.qf.pojo.User" alias="user"></typeAlias>-->
+        <!--包扫描方式配别名-->
+<!--        <package name="com.qf.pojo"/>-->
+<!--    </typeAliases>-->
     <!--JDBC环境配置、选中默认环境-->
     <environments default="MySqlDB">
         <!--MySql数据库环境配置-->

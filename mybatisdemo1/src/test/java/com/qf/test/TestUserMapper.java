@@ -11,10 +11,7 @@ import org.junit.Test;
 
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author Administrator
@@ -78,7 +75,7 @@ public class TestUserMapper {
     @Test
     public void testUpdateUserById()throws Exception{
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        User user = new User(20, "测试", "123456", "男", sdf.parse("2000-01-01"), new Date());
+        User user = new User(28, "测试", "123456", "男", sdf.parse("2000-01-01"), new Date());
         user.setName("饕餮");
         user.setPassword("123");
         user.setSex("女");
@@ -136,6 +133,36 @@ public class TestUserMapper {
         } catch (Exception e) {
             MybatisUtils.rollback();
             throw new RuntimeException(e);
+        }
+    }
+    @Test
+    public void testFindByNameAndSexAndPwd(){
+        User user = new User();
+//        user.setName("张");
+        user.setSex("男");
+        user.setPassword("123");
+        UserMapper userMapper = MybatisUtils.getMapper(UserMapper.class);
+        List<User> users = userMapper.findByNameAndSexAndPwd(user);
+        System.out.println(users.toString());
+
+    }
+    @Test
+    public void testFindByIds(){
+        UserMapper userMapper = MybatisUtils.getMapper(UserMapper.class);
+        List<Integer> ids = new ArrayList<>();
+        ids.add(1);
+        ids.add(2);
+        ids.add(3);
+        List<User> list = userMapper.findByIds(ids);
+        System.out.println(list.toString());
+    }
+
+    @Test
+    public void testFindAllTemp(){
+        UserMapper userMapper = MybatisUtils.getMapper(UserMapper.class);
+        List<User> allTemp = userMapper.findAllTemp();
+        for (User user : allTemp) {
+            System.out.println(user.toString());
         }
     }
 }

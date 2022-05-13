@@ -4,10 +4,15 @@
 <!--要求整个映射文件记住-->
 <!--namespace要是接口文件的全限定名称-->
 <mapper namespace="com.qf.mapper.UserMapper">
+    <sql id="selectUserAll">
+        select * from t_users
+    </sql>
+
     <!--查询用户表所有数据-->
     <!--id是当前这个标签的唯一标识-->
     <select id="findAll" resultType="com.qf.pojo.User" >
-        select * from t_users;
+        <include refid="selectUserAll"></include>
+        <!-- /*select * from t_users;*/-->
     </select>
     <select id="findById" resultType="com.qf.pojo.User" >
         select * from t_users where id =#{id};
@@ -27,11 +32,38 @@
         </selectKey>
         insert into t_users values(null,#{user.name},#{user.password},#{user.sex},#{user.birthday},#{user.registTime});
     </insert>
-    
+    <!--
     <update id="updateUserById">
         update t_users set name = #{user.name},sex = #{user.sex},password =#{user.password},registTime = #{user.registTime} where id = #{user.id};
     </update>
+    -->
+    <update id="updateUserById">
+        update t_users
+            <set>
+                <if test="user.name != null">
+                    name = #{user.name},
+                </if>
 
+                <if test="user.sex != null">
+                     sex = #{user.sex},
+                </if>
+
+                <if test="user.password != null">
+                     password = #{user.password},
+                </if>
+
+                <if test="user.birthday != null">
+                     birthday = #{user.birthday},
+                </if>
+
+                <if test="user.registTime != null">
+                     registTime = #{user.registTime},
+                </if>
+
+
+            </set>
+        where id = #{user.id};
+    </update>
     <delete id="deleteById">
         delete from t_users where id = #{id};
     </delete>
@@ -47,4 +79,39 @@
     <delete id="deleteByName">
         delete from t_users where name like '%${name}%';
     </delete>
+
+    <select id="findByNameAndSexAndPwd" resultType="com.qf.pojo.User">
+        <include refid="selectUserAll"></include>
+        <where>
+            <if test="user.name != null and user.name != '' ">
+                name like '%${user.name}%'
+            </if>
+
+            <if test="user.sex != null and user.sex != ''">
+                and sex = #{user.sex}
+            </if>
+
+            <if test="user.password != null and user.password != ''">
+                and password = #{user.password}
+            </if>
+        </where>
+    </select>
+
+    <select id="findByIds" resultType="com.qf.pojo.User">
+        <!--
+        collection: 循环的集合或者其他
+        item：循环的临时变量
+        open：循环前拼接的字符串
+        close：循环后拼接的字符串
+        separator：遍历过程中的分隔符
+        -->
+        select * from t_users where
+        <foreach collection="ids" item="id" open="id in(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </select>
+
+    <select id="findAllTemp" resultType="com.qf.pojo.User">
+        select id,name as myname,password,sex,birthday,registTime from t_users;
+    </select>
 </mapper>

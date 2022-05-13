@@ -27,4 +27,10 @@ public interface UserMapper  {
     public User selectByNameAndPwd(@Param("name")String name,@Param("password")String password);
     public User selectByNameAndPwdMap(@Param("map")Map<String,String> map);
     public void deleteByName(@Param("name")String name);
+    
+    public List<User> findByNameAndSexAndPwd(@Param("user")User user);
+    
+    public List<User> findByIds(@Param("ids")List<Integer> ids);
+
+    public List<User> findAllTemp();
 }

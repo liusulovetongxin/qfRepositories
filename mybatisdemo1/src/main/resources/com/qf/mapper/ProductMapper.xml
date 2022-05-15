@@ -5,4 +5,75 @@
     <select id="findAll" resultType="com.qf.pojo.Product">
         select * from t_product;
     </select>
+
+    <resultMap id="ProductAndOrderResultMap" type="com.qf.pojo.Product">
+        <id property="id" column="id"></id>
+        <result property="name" column="name"></result>
+
+        <!--collection标签，用于将返回的多条数据放入对应的集合中存储 -->
+        <!--property:集合属性名称 -->
+        <!--ofType:指定集合属性的类型 -->
+        <collection property="orderList" ofType="com.qf.pojo.Order">
+            <id property="id" column="oid"></id>
+            <result property="name" column="oName"></result>
+            <result property="uid" column="uid"></result>
+            <result property="pid" column="pid"></result>
+        </collection>
+    </resultMap>
+
+    <select id="findProductAndOrder" resultMap="ProductAndOrderResultMap">
+        select a.*, b.id as oid,b.name as oName,b.uid,b.pid from t_product as a
+                                                                     left join t_order as b
+                                                                               on a.id = b.pid;
+    </select>
+    <!--
+    <resultMap id="ProductAndOrderAndUserResultMap" type="com.qf.pojo.Product">
+        <id property="id" column="id"></id>
+        <result property="name" column="name"></result>
+
+        &lt;!&ndash;collection标签，用于将返回的多条数据放入对应的集合中存储 &ndash;&gt;
+        &lt;!&ndash;property:集合属性名称 &ndash;&gt;
+        &lt;!&ndash;ofType:指定集合属性的类型 &ndash;&gt;
+        <collection property="orderList" ofType="com.qf.pojo.Order">
+            <id property="id" column="oid"></id>
+            <result property="name" column="oName"></result>
+            <result property="uid" column="uid"></result>
+            <result property="pid" column="pid"></result>
+
+                <association property="user" javaType="com.qf.pojo.User">
+                    <id property="id" column="userId"></id>
+                    <result property="name" column="uName"></result>
+                    <result property="password" column="password"></result>
+                    <result property="sex" column="sex"></result>
+                    <result property="birthday" column="birthday"></result>
+                    <result property="registTime" column="registTime"></result>
+                </association>
+        </collection>
+    </resultMap>
+    -->
+    <resultMap id="ProductAndOrderAndUserResultMap" type="com.qf.pojo.Product">
+        <id property="id" column="id"></id>
+        <result property="name" column="name"></result>
+            <collection property="orderList" ofType="com.qf.pojo.Order">
+                <id property="id" column="oid"></id>
+                <result property="name" column="oName"></result>
+                <result property="uid" column="uid"></result>
+                <result property="pid" column="pid"></result>
+                <association property="user" javaType="com.qf.pojo.User">
+                    <id property="id" column="userId"></id>
+                    <result property="name" column="uName"></result>
+                    <result property="password" column="password"></result>
+                    <result property="sex" column="sex"></result>
+                    <result property="birthday" column="birthday"></result>
+                    <result property="registTime" column="registTime"></result>
+                </association>
+            </collection>
+    </resultMap>
+    <select id="findProductAndOrderAndUser" resultMap="ProductAndOrderAndUserResultMap">
+        select a.*, b.id as oid,b.name as oName,b.uid,b.pid,c.id as userId,c.name as uName,c.password,c.sex,c.birthday,c.registTime from t_product as a
+                                                                                                                                             left join t_order as b
+                                                                                                                                                       on a.id = b.pid
+                                                                                                                                             left join t_users as c
+                                                                                                                                                       on b.uid = c.id;
+    </select>
 </mapper>

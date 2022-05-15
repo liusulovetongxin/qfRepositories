@@ -9,7 +9,24 @@ public class Order {
     private String name;
     private Integer uid;
     private Integer pid;
+    private User user;
+    private Product product;
 
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public String getId() {
         return id;
@@ -43,4 +60,14 @@ public class Order {
         this.pid = pid;
     }
 
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", uid=" + uid +
+                ", pid=" + pid +
+                ", user="  +
+                '}';
+    }
 }

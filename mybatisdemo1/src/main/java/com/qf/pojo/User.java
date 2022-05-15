@@ -1,7 +1,6 @@
 package com.qf.pojo;
 
 import java.util.Date;
-import java.util.List;
 
 /**
  * @author zhaojian
@@ -15,12 +14,33 @@ public class User {
     private Date birthday;
     private Date registTime;
 
+    public UserDesc getUserDesc() {
+        return userDesc;
+    }
+
+    public void setUserDesc(UserDesc userDesc) {
+        this.userDesc = userDesc;
+    }
+
+    private UserDesc userDesc;
    
 
     //无参构造（必备构造二选一）
     public User() {}
 
+    public User(Integer id, String name, String password, String sex, Date birthday, Date registTime, UserDesc userDesc) {
+        this.id = id;
+        this.name = name;
+        this.password = password;
+        this.sex = sex;
+        this.birthday = birthday;
+        this.registTime = registTime;
+        this.userDesc = userDesc;
+    }
+
     //全参构造（必备构造二选一）
+
+
     public User(Integer id, String name, String password, String sex, Date birthday, Date registTime) {
         this.id = id;
         this.name = name;
@@ -87,7 +107,7 @@ public class User {
                 ", sex='" + sex + '\'' +
                 ", birthday=" + birthday +
                 ", registTime=" + registTime +
+                ", userDesc=" + userDesc +
                 '}';
     }
-
 }

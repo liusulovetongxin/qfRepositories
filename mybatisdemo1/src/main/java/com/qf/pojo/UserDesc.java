@@ -33,4 +33,12 @@ public class UserDesc {
         this.phoneNum = phoneNum;
     }
 
+    @Override
+    public String toString() {
+        return "UserDesc{" +
+                "id=" + id +
+                ", address='" + address + '\'' +
+                ", phoneNum=" + phoneNum +
+                '}';
+    }
 }

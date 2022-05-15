@@ -33,4 +33,6 @@ public interface UserMapper  {
     public List<User> findByIds(@Param("ids")List<Integer> ids);
 
     public List<User> findAllTemp();
+    
+    public List<User> findUserAndDesc();
 }

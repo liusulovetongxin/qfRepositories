@@ -15,4 +15,7 @@ import java.util.List;
 
 public interface ProductMapper {
     public List<Product> findAll();
+
+    public List<Product> findProductAndOrder();
+    public List<Product> findProductAndOrderAndUser();
 }

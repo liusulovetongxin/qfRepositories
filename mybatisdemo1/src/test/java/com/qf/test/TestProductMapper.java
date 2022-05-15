@@ -1,5 +1,6 @@
 package com.qf.test;
 
+import com.qf.Utils.MybatisUtils;
 import com.qf.mapper.ProductMapper;
 import com.qf.pojo.Product;
 import org.apache.ibatis.io.Resources;
@@ -36,5 +37,27 @@ public class TestProductMapper {
         //执行实体对象的方法
         List<Product> products = productMapper.findAll();
         System.out.println(products.toString());
+    }
+
+    @Test
+    public void testFindProductAndOrder(){
+        ProductMapper productMapper = MybatisUtils.getMapper(ProductMapper.class);
+        List<Product> list = productMapper.findProductAndOrder();
+        if (list != null) {
+            for (Product product : list) {
+                System.out.println(product.toString());
+            }
+        }
+
+    }
+    @Test
+    public void testFindProductAndOrderAndUser(){
+        ProductMapper productMapper = MybatisUtils.getMapper(ProductMapper.class);
+        List<Product> list = productMapper.findProductAndOrderAndUser();
+        if (list != null) {
+            for (Product product : list) {
+                System.out.println(product.toString());
+            }
+        }
     }
 }

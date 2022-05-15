@@ -6,6 +6,13 @@
 <configuration>
     <!--数据库配置-->
     <properties resource="jdbc.properties" />
+    
+    <settings>
+        <setting name="cacheEnabled" value="true"/>
+    </settings>
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageInterceptor"></plugin>
+    </plugins>
     <!--别名不推荐使用，不方便切换-->
 <!--    <typeAliases>-->
         <!--给单个配置别名-->
@@ -20,12 +27,12 @@
             <!--事务管理-->
             <transactionManager type="JDBC"/>
             <!--连接池-->
-            <dataSource type="org.apache.ibatis.datasource.pooled.PooledDataSourceFactory">
-                <property name="driver" value="${jdbc.driver}"/>
+            <dataSource type="com.qf.Utils.MyDruidDataSourceFactory">
+                <property name="driverClass" value="${driverClass}"/>
                 <!-- &转义&amp; -->
-                <property name="url" value="${jdbc.url}"/>
-                <property name="username" value="${jdbc.username}"/>
-                <property name="password" value="${jdbc.password}"/>
+                <property name="jdbcUrl" value="${jdbcUrl}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
             </dataSource>
         </environment>
     </environments>
@@ -35,5 +42,6 @@
         <!--注册Mapper文件的所在位置-->
         <mapper resource="com/qf/mapper/UserMapper.xml"/>
         <mapper resource="com/qf/mapper/ProductMapper.xml"/>
+        <mapper resource="com/qf/mapper/OrderMapper.xml"/>
     </mappers>
 </configuration>

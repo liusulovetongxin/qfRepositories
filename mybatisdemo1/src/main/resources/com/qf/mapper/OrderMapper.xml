@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.mapper.OrderMapper">
+    <resultMap id="FindAllResultMap" type="com.qf.pojo.Order">
+        <id property="id" column="id"></id>
+        <result property="name" column="name"></result>
+        <result property="uid" column="uid"></result>
+        <result property="pid" column="pid"></result>
+        <association property="product" javaType="com.qf.pojo.Product">
+            <id property="id" column="productId"></id>
+            <result property="name" column="pName"></result>
+        </association>
+        <association property="user" javaType="com.qf.pojo.User">
+            <id property="id" column="userId"></id>
+            <result property="name" column="username"></result>
+            <result property="password" column="password"></result>
+            <result property="sex" column="sex"></result>
+            <result property="birthday" column="birthday"></result>
+            <result property="registTime" column="registTime"></result>
+            <association property="userDesc" javaType="com.qf.pojo.UserDesc">
+                <id property="id" column="userDescId"></id>
+                <result property="address" column="address"></result>
+                <result property="phoneNum" column="phone"></result>
+            </association>
+        </association>
+    </resultMap>
+    <select id="FindAll" resultMap="FindAllResultMap">
+        select a.*,b.id as userId,b.name as username,b.password,b.sex,b.birthday,b.registTime,c.id as productId,c.name as pName,d.id as userDescId,d.address,d.phone from t_order as a left join t_users as b on a.uid = b.id
+                                                                                                                                                                                       left join t_product as c on a.pid = c.id
+                                                                                                                                                                                       left join t_user_desc as d on a.uid = d.id;
+    </select>
+    <select id="findAllOrderPageHelper" resultType="com.qf.pojo.Order">
+        select * from t_order
+    </select>
+</mapper>

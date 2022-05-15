@@ -93,7 +93,7 @@ public class TestUserMapper {
         MybatisUtils.openSession();
         UserMapper userMapper = MybatisUtils.getMapper(UserMapper.class);
         try {
-            userMapper.deleteById(20);
+            userMapper.deleteById(28);
             MybatisUtils.commit();
         } catch (Exception e) {
             MybatisUtils.rollback();
@@ -163,6 +163,17 @@ public class TestUserMapper {
         List<User> allTemp = userMapper.findAllTemp();
         for (User user : allTemp) {
             System.out.println(user.toString());
+        }
+    }
+
+    @Test
+    public void testFindUserAndDesc(){
+        UserMapper userMapper = MybatisUtils.getMapper(UserMapper.class);
+        List<User> list = userMapper.findUserAndDesc();
+        if (list != null) {
+            for (User user : list) {
+                System.out.println(user.toString());
+            }
         }
     }
 }

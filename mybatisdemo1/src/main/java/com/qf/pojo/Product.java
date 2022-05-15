@@ -1,5 +1,7 @@
 package com.qf.pojo;
 
+import java.util.List;
+
 /**
  * @author zhaojian
  */
@@ -7,6 +9,16 @@ public class Product {
 
     private Integer id;
     private String name;
+    private List<Order> orderList;
+    public List<Order> getOrderList() {
+        return orderList;
+    }
+
+    public void setOrderList(List<Order> orderList) {
+        this.orderList = orderList;
+    }
+
+
 
     public Product() {
     }
@@ -37,6 +49,7 @@ public class Product {
         return "Product{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", orderList=" + orderList.toString() +
                 '}';
     }
 }

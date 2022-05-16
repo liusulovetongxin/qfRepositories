@@ -3,27 +3,91 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.qf.mapper.UserMapper">
+    <cache/>
 
+    <select id="findAll" resultType="com.qf.pojo.TbUser">
+        select * from tb_user
+    </select>
+    <select id="findById" resultType="com.qf.pojo.TbUser">
+        select * from tb_user where id = #{id}
+    </select>
+    <select id="findByUserNameAndPasswordWithMap" resultType="com.qf.pojo.TbUser">
+        select * from tb_user where username = #{username} and password = #{password}
+    </select>
+    <select id="findByUnameAndPasswordWithPojo" resultType="com.qf.pojo.TbUser">
+        select * from tb_user where username = #{username} and password = #{password}
+    </select>
+    <select id="findByUnameAndPassword" resultType="com.qf.pojo.TbUser">
+        select * from tb_user where username = #{username} and password = #{password}
+    </select>
+    <select id="findByNameLike" resultType="com.qf.pojo.TbUser">
+        select * from tb_user where name like concat("%",#{likeName},"%")
+    </select>
+    <select id="findBySexLike" resultType="com.qf.pojo.TbUser">
+        select * from tb_user where sex like concat("%",#{likeSex},"%")
+    </select>
+    
+    
+    <resultMap id="userwithorder" type="com.qf.pojo.TbUser">
+        <id property="id" column="id"></id>
+        <result property="username" column="username"></result>
+        <result property="email" column="email"></result>
+        <result property="gender" column="gender"></result>
+        <result property="flag" column="flag"></result>
+        <result property="role" column="role"></result>
+        <result property="code" column="code"></result>
+        
+        <collection property="orderList" ofType="com.qf.pojo.TbOrder">
+            <id property="id" column="oid"></id>
+            <result property="uid" column="uid"/>
+            <result property="money" column="money"/>
+            <result property="status" column="status"/>
+            <result property="time" column="time"/>
+            <result property="aid" column="aid"/>
 
-    <select id="findAll" resultType="com.qf.pojo.TUsers">
-        select * from t_users
+        </collection>
+
+    </resultMap>
+    <select id="findWithOrderByUid" resultMap="userwithorder" >
+        select *,o.id oid
+        from tb_user u left join
+        tb_order o on u.id=o.uid
+        where u.id=#{uid}
     </select>
-    <select id="findById" resultType="com.qf.pojo.TUsers">
-        select * from t_users where id = #{id}
+<!--
+if 数字不能和空字符进行比较
+-->
+    <select id="findByMulti" resultType="com.qf.pojo.TbUser">
+        select *
+        from tb_user
+        <where>
+        <if test="username != null and username!=''">
+            and username = #{username}
+        </if>
+        <if test="password != null and password!=''">
+            and password = #{password}
+        </if>
+        <if test="role != null ">
+            and role = #{role}
+        </if>
+        </where>
     </select>
-    <select id="findByUserNameAndPasswordWithMap" resultType="com.qf.pojo.TUsers">
-        select * from t_users where name = #{name} and password = #{password}
-    </select>
-    <select id="findByUnameAndPasswordWithPojo" resultType="com.qf.pojo.TUsers">
-        select * from t_users where name = #{name} and password = #{password}
-    </select>
-    <select id="findByUnameAndPassword" resultType="com.qf.pojo.TUsers">
-        select * from t_users where name = #{name} and password = #{password}
-    </select>
-    <select id="findByNameLike" resultType="com.qf.pojo.TUsers">
-        select * from t_users where name like concat("%",#{likeName},"%")
-    </select>
-    <select id="findBySexLike" resultType="com.qf.pojo.TUsers">
-        select * from t_users where sex like concat("%",#{likeSex},"%")
+    
+<!--
+collection 遍历哪一个集合
+open 开始之前加的
+close 查询结束的符号
+index ：索引
+separator：分隔符
+item 遍历的变量
+-->
+    <select id="findByIds" resultType="com.qf.pojo.TbUser">
+        select *
+        from tb_user
+        <if test="ids != null and ids.size()>0">
+            <foreach collection="ids" open="where id in(" close=")" separator="," item="id" nullable="false">
+                #{id}
+            </foreach>
+        </if>
     </select>
 </mapper>

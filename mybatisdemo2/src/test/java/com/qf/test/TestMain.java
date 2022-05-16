@@ -1,7 +1,9 @@
 package com.qf.test;
 
+import com.qf.mapper.PassportMapper;
 import com.qf.mapper.UserMapper;
-import com.qf.pojo.TUsers;
+import com.qf.pojo.TbPassportuser;
+import com.qf.pojo.TbUser;
 import com.qf.utils.MyBatisUtil;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -10,6 +12,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.Test;
 
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,9 +33,9 @@ public class TestMain {
         SqlSessionFactory sessionFactory = new SqlSessionFactoryBuilder().build(is);
         SqlSession sqlSession = sessionFactory.openSession();
         UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
-        List<TUsers> list = userMapper.findAll();
+        List<TbUser> list = userMapper.findAll();
         if (list != null) {
-            for (TUsers tUsers : list) {
+            for (TbUser tUsers : list) {
                 System.err.println(tUsers.toString());
             }
         }
@@ -42,39 +45,39 @@ public class TestMain {
     @Test
     public void testFindById(){
         UserMapper userMapper = MyBatisUtil.getMapper(UserMapper.class);
-        TUsers user = userMapper.findById(1L);
+        TbUser user = userMapper.findById(1L);
         System.err.println(user.toString());
     }
     @Test
     public void testFindByUserNameAndPasswordWithMap(){
         UserMapper userMapper = MyBatisUtil.getMapper(UserMapper.class);
         Map map = new HashMap();
-        map.put("name", "张三");
+        map.put("username", "张三");
         map.put("password", "123");
-        TUsers user = userMapper.findByUserNameAndPasswordWithMap(map);
+        TbUser user = userMapper.findByUserNameAndPasswordWithMap(map);
         System.err.println(user.toString());
     }
     @Test
     public void testFindByUnameAndPasswordWithPojo(){
         UserMapper userMapper = MyBatisUtil.getMapper(UserMapper.class);
-        TUsers tUsers = new TUsers();
-        tUsers.setName("张三");
+        TbUser tUsers = new TbUser();
+        tUsers.setUsername("张三");
         tUsers.setPassword("123");
-        TUsers user = userMapper.findByUnameAndPasswordWithPojo(tUsers);
+        TbUser user = userMapper.findByUnameAndPasswordWithPojo(tUsers);
         System.err.println(user.toString());
     }
     @Test
     public void testFindByUnameAndPassword(){
         UserMapper userMapper = MyBatisUtil.getMapper(UserMapper.class);
-        TUsers user = userMapper.findByUnameAndPassword("张三","123");
+        TbUser user = userMapper.findByUnameAndPassword("张三","123");
         System.err.println(user.toString());
     }
     @Test
     public void testFindByNameLike(){
         UserMapper userMapper = MyBatisUtil.getMapper(UserMapper.class);
-        List<TUsers> list = userMapper.findByNameLike("张");
+        List<TbUser> list = userMapper.findByNameLike("张");
         if (list != null) {
-            for (TUsers user : list) {
+            for (TbUser user : list) {
                 System.err.println(user.toString());
             }
         }
@@ -82,11 +85,61 @@ public class TestMain {
     @Test
     public void testFindBySexLike(){
         UserMapper userMapper = MyBatisUtil.getMapper(UserMapper.class);
-        List<TUsers> list = userMapper.findBySexLike("男");
+        List<TbUser> list = userMapper.findBySexLike("男");
         if (list != null) {
-            for (TUsers user : list) {
+            for (TbUser user : list) {
                 System.err.println(user.toString());
             }
         }
+    }
+
+    @Test
+    public void testFindWithOrderByUid(){
+        UserMapper userMapper = MyBatisUtil.getMapper(UserMapper.class);
+        TbUser user = userMapper.findWithOrderByUid(3);
+        System.err.println(user.toString());
+    }
+    @Test
+    public void testpassport(){
+        PassportMapper passportMapper = MyBatisUtil.getMapper(PassportMapper.class);
+        TbPassportuser user = passportMapper.findById(1);
+        System.err.println(user.toString());
+    }
+    @Test
+    public void testFindByMulti(){
+        UserMapper userMapper = MyBatisUtil.getMapper(UserMapper.class);
+        Map map = new HashMap();
+        map.put("username", "zhangsan");
+        List<TbUser> list = userMapper.findByMulti(map);
+        if (list != null) {
+            for (TbUser user : list) {
+                System.err.println(user.toString());
+            }
+        }
+    }
+    @Test
+    public void testFindByIds(){
+        UserMapper userMapper = MyBatisUtil.getMapper(UserMapper.class);
+       List<Long> Longs = new ArrayList<>();
+       Longs.add(1L);
+       Longs.add(2L);
+       Longs.add(3L);
+        List<TbUser> list = userMapper.findByIds(Longs);
+        if (list != null) {
+            for (TbUser user : list) {
+                System.err.println(user.toString());
+            }
+        }
+    }
+
+    @Test
+    public void testUpdateById(){
+        PassportMapper passportMapper = MyBatisUtil.getMapper(PassportMapper.class);
+        TbPassportuser tbPassportuser = new TbPassportuser();
+        tbPassportuser.setId(1L);
+        tbPassportuser.setSex("女");
+        tbPassportuser.setName("李四");
+        passportMapper.updateById(tbPassportuser);
+        MyBatisUtil.commit();
     }
 }

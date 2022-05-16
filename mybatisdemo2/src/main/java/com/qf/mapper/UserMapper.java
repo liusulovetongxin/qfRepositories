@@ -1,6 +1,6 @@
 package com.qf.mapper;
 
-import com.qf.pojo.TUsers;
+import com.qf.pojo.TbUser;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -16,17 +16,19 @@ import java.util.Map;
  */
 
 public interface UserMapper {
-    List<TUsers> findAll();
+    List<TbUser> findAll();
 
-    TUsers findById(Long id);
+    TbUser findById(Long id);
 
-    TUsers findByUserNameAndPasswordWithMap(Map map);
+    TbUser findByUserNameAndPasswordWithMap(Map map);
 
-    TUsers findByUnameAndPasswordWithPojo(TUsers tUsers);
+    TbUser findByUnameAndPasswordWithPojo(TbUser tUsers);
 
-    TUsers findByUnameAndPassword(@Param("name")String name,@Param("password")String password);
+    TbUser findByUnameAndPassword(@Param("username")String username,@Param("password")String password);
 
-    List<TUsers> findByNameLike(@Param("likeName")String likeName);
-    List<TUsers> findBySexLike(@Param("likeSex")String likeSex);
-
+    List<TbUser> findByNameLike(@Param("likeName")String likeName);
+    List<TbUser> findBySexLike(@Param("likeSex")String likeSex);
+    TbUser findWithOrderByUid(@Param("uid")long uid);
+    List<TbUser> findByMulti(Map map);
+    List<TbUser> findByIds(@Param("ids") List<Long> ids);
 }

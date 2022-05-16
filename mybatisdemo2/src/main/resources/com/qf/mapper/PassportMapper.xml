@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qf.mapper.PassportMapper">
+
+	<resultMap id="findByIdResultMap" type="com.qf.pojo.TbPassportuser">
+		<id property="id" column="id"/>
+		<result property="name" column="name"/>
+		<result property="sex" column="sex"/>
+		<association property="tbPassport" javaType="com.qf.pojo.TbPassport">
+			<id property="id" column="tppid"/>
+			<result property="passport" column="passport"/>
+			<result property="passportid" column="passportid"/>
+			<result property="uid" column="uid"/>
+		</association>
+	</resultMap>
+
+	<select id="findById" resultMap="findByIdResultMap">
+		select *,tpp.id as tppid from tb_passportuser tp
+		inner join tb_passport tpp
+		on tp.id = tpp.uid
+		where tp.id = #{id}
+	</select>
+
+	<update id="updateById">
+		update tb_passportuser
+		<set>
+			<if test="name != null and name != ''">
+				name = #{name},
+			</if>
+		    <if test="sex != null and sex != ''">
+				sex = #{sex}
+			</if>
+		</set>
+	</update>
+</mapper>

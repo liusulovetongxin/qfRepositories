@@ -45,4 +45,19 @@ public class TestMain {
 //        }
         System.err.println(pageInfo);
     }
+
+    @Test
+    public void testUpdateProvider()throws Exception{
+        InputStream is = Resources.getResourceAsStream("mybatis.xml");
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(is);
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+        TbUser tbUser = new TbUser();
+        tbUser.setId(4L);
+        tbUser.setCode("123123");
+        tbUser.setEmail("123456@qq.com");
+        userMapper.updateUser(tbUser);
+        sqlSession.commit();
+        sqlSession.close();
+    }
 }

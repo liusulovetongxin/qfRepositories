@@ -5,14 +5,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.qf</groupId>
-    <artifactId>mybatisdemo2</artifactId>
+    <artifactId>mybatis2</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
-
-    <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
-    </properties>
-
+    <modules>
+        <module>mybatisdatasources01</module>
+        <module>mybatispagehelper</module>
+        <module>mybatisannotion03</module>
+    </modules>
     <dependencies>
         <dependency>
             <groupId>org.mybatis</groupId>
@@ -20,6 +20,7 @@
             <version>3.5.9</version>
         </dependency>
         <dependency>
+            <scope>runtime</scope>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.26</version>
@@ -28,22 +29,12 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.12</version>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
-            <version>1.1.16</version>
-        </dependency>
-        <dependency>
-            <groupId>com.github.pagehelper</groupId>
-            <artifactId>pagehelper</artifactId>
-            <version>5.1.10</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jboss</groupId>
-            <artifactId>jboss-vfs</artifactId>
-            <version>3.2.15.Final</version>
+            <version>1.2.9</version>
         </dependency>
     </dependencies>
+
 </project>

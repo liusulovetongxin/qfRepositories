@@ -12,6 +12,9 @@
         <module>01springsimple</module>
         <module>02springdi</module>
         <module>03springfactory</module>
+        <module>04springiocanno</module>
+        <module>05springstaticproxy</module>
+        <module>06springdyproxy</module>
 
     </modules>
 

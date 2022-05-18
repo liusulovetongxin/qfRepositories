@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--用spring创建userdao对象-->
+    <bean class="com.qf.dao.Impl.UserDaoImpl" id="userDao"/>
+    <!--用spring创建userservice 对象-->
+    <bean class="com.qf.service.Impl.UserServiceImpl" id="userService">
+        <!--将userdao对象通过property赋值给userservice对象
+        ref：指向的被spring管理的另一个对象
+        -->
+        <property name="userDao" ref="userDao"/>
+    </bean>
+
+    <bean class="com.qf.pojo.City" id="city">
+        <property name="cityName" value="上海"/>
+    </bean>
+    <bean class="com.qf.pojo.Address" id="address">
+        <property name="city" ref="city"/>
+    </bean>
+    <bean class="com.qf.pojo.Item" id="item">
+        <property name="name" value="Item的名字"/>
+    </bean>
+    <bean class="com.qf.pojo.Order" id="order">
+        <property name="address" ref="address"/>
+        <property name="item" ref="item"/>
+    </bean>
+    <bean class="com.qf.pojo.User" id="user">
+        <property name="id" value="100"/>
+        <property name="password" value="0"/>
+        <property name="sex" value="weizhi"/>
+        <property name="age" value="38"/>
+        <property name="bornDate" value="2022/05/18"/>
+
+        <property name="hobbys">
+            <array>
+                <value>chifan</value>
+                <value>shuijiao</value>
+                <value>dadoudou</value>
+                <value>chifan</value>
+            </array>
+            <!--            <list>-->
+            <!--                <value>chifan</value>-->
+            <!--                <value>shuijiao</value>-->
+            <!--                <value>dadoudou</value>-->
+            <!--                <value>chifan</value>-->
+            <!--            </list>-->
+        </property>
+        <property name="names">
+            <!--            <array>-->
+            <!--                <value>zhangsan</value>-->
+            <!--                <value>lisi</value>-->
+            <!--                <value>wangwu</value>-->
+            <!--                <value>zhaoliu</value>-->
+            <!--            </array>-->
+            <list>
+                <value>zhangsan</value>
+                <value>lisi</value>
+                <value>wangwu</value>
+                <value>zhaoliu</value>
+            </list>
+            <!--            <set>-->
+            <!--                <value>zhangsan</value>-->
+            <!--                <value>lisi</value>-->
+            <!--                <value>wangwu</value>-->
+            <!--                <value>zhaoliu</value>-->
+            <!--            </set>-->
+        </property>
+        <property name="phone">
+            <!--            <array>-->
+            <!--                <value>13811111111</value>-->
+            <!--                <value>138222222</value>-->
+            <!--                <value>138333333</value>-->
+            <!--                <value>13811111111</value>-->
+            <!--            </array>-->
+            <!--            <list>-->
+            <!--                <value>13811111111</value>-->
+            <!--                <value>138222222</value>-->
+            <!--                <value>138333333</value>-->
+            <!--                <value>13811111111</value>-->
+            <!--            </list>-->
+            <set>
+                <value>13811111111</value>
+                <value>138222222</value>
+                <value>138333333</value>
+                <value>13811111111</value>
+            </set>
+        </property>
+        <property name="countries">
+            <map>
+                <entry key="name" value="zhangsan"/>
+                <entry key="age" value="18"/>
+                <entry key="address" value="shandongshengbeijingshi"/>
+            </map>
+        </property>
+        <property name="files">
+            <!--            <map>-->
+            <!--                <entry key="pkey" value="pvalue"/>-->
+            <!--            </map>-->
+            <props>
+                <prop key="pkey1">value1</prop>
+                <prop key="pkey1">value4</prop>
+                <prop key="pkey2">value2</prop>
+                <prop key="pkey3">value3</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!--构造参数注入-->
+    <bean class="com.qf.pojo.Person" id="person" scope="singleton">
+        <constructor-arg name="name" value="test"/>
+        <constructor-arg name="sex" value="男"/>
+    </bean>
+
+</beans>

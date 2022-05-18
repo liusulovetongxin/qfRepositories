@@ -9,7 +9,10 @@
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <modules>
-        <module>springsimple01</module>
+        <module>01springsimple</module>
+        <module>02springdi</module>
+        <module>03springfactory</module>
+
     </modules>
 
     <properties>

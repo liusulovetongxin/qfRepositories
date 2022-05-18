@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--用spring创建userdao对象-->
+    <bean class="com.qf.dao.Impl.UserDaoImpl" id="userDao"/>
+    <!--用spring创建userservice 对象-->
+    <bean class="com.qf.service.Impl.UserServiceImpl" id="userService" init-method="init" destroy-method="destory">
+        <!--将userdao对象通过property赋值给userservice对象
+        ref：指向的被spring管理的另一个对象
+        -->
+        <property name="userDao" ref="userDao"/>
+    </bean>
+
+
+
+</beans>

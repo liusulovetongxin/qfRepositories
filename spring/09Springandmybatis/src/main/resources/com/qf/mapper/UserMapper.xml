@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qf.mapper.UserMapper">
+
+
+
+	<select id="findByLikeName" resultType="com.qf.pojo.TbUser">
+		select * from tb_user
+		<where>
+			<if test="likeName != null and likeName !=''">
+				username like concat('%',#{likeName},'%')
+			</if>
+		</where>
+	</select>
+
+
+    <insert id="addUser"  parameterType="com.qf.pojo.TbUser">
+		insert into tb_user values(null,#{username},#{password},#{email},#{gender},#{flag},#{role},#{code})
+	</insert>
+</mapper>

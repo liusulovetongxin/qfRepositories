@@ -16,7 +16,9 @@
         <module>05springstaticproxy</module>
         <module>06springdyproxy</module>
         <module>07springaop</module>
-
+        <module>08springaopano</module>
+        <module>09Springandmybatis</module>
+        <module>10springandmybatisano</module>
     </modules>
 
     <properties>
@@ -34,6 +36,12 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.12</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.26</version>
         </dependency>
     </dependencies>
 

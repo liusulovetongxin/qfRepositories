@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:property-placeholder location="classpath:druid.properties"/>
+    <bean class="com.alibaba.druid.pool.DruidDataSource" id="dataSource">
+        <property name="driverClassName" value="${jdbc.driverClassName}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
+
+    <!--创建  mybatis的sqlsessionfactory 的对象-->
+    <bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactory">
+        <property name="configLocation" value="classpath:mybatis.xml"/>
+        <!--这个属性的作用是表示告诉sqlsessionfactory使用哪个数据库连接-->
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <!--扫描mapper-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer" id="mapperScannerConfigurer">
+<!--扫描的包必须扫到mapper的包-->
+        <property name="basePackage" value="com/qf/mapper"/>
+    </bean>
+
+    <context:component-scan base-package="com.qf"/>
+
+    <!--设置事务平台管理器
+    当前我们使用的是连接池类型的
+
+    -->
+    <bean class="org.springframework.jdbc.datasource.DataSourceTransactionManager" id="transactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+
+    <!--配置事务的增强，也就是开启提交事务，回滚事务等等
+    配置具体方法的行为，比如只读，传播行为，隔离级别等等
+    -->
+
+    <tx:advice transaction-manager="transactionManager" id="txAdvice">
+            <tx:attributes>
+                <tx:method name="find*" read-only="true" propagation="SUPPORTS"/>
+                <tx:method name="get*" read-only="true" propagation="SUPPORTS"/>
+                <tx:method name="update*" />
+                <tx:method name="add*" />
+                <tx:method name="insert*" />
+                <tx:method name="delete*" />
+            </tx:attributes>
+    </tx:advice>
+    <aop:config>
+        <!--使用上面的通知增强-->
+        <aop:advisor advice-ref="txAdvice" pointcut="execution(* com.qf..impl.*Impl.*(..))"/>
+    </aop:config>
+</beans>

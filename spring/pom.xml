@@ -15,6 +15,7 @@
         <module>04springiocanno</module>
         <module>05springstaticproxy</module>
         <module>06springdyproxy</module>
+        <module>07springaop</module>
 
     </modules>
 

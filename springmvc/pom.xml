@@ -11,6 +11,12 @@
     <modules>
         <module>01servlet</module>
         <module>02springmvpsimple</module>
+        <module>03springmvcforward</module>
+        <module>04springmvcredirect</module>
+        <module>05springmvcdata</module>
+        <module>06springmvcjson</module>
+
+
     </modules>
 
     <properties>

@@ -32,6 +32,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public void addUser(TbUser tbUser) {
         userMapper.insert(tbUser);
-    int i = 1/0;
+        int i = 1/0;
     }
 }

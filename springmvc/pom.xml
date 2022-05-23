@@ -15,6 +15,7 @@
         <module>04springmvcredirect</module>
         <module>05springmvcdata</module>
         <module>06springmvcjson</module>
+        <module>07springmvcex</module>
 
 
     </modules>

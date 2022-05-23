@@ -19,6 +19,7 @@
         <module>08springaopano</module>
         <module>09Springandmybatis</module>
         <module>10springandmybatisano</module>
+        <module>11springevent</module>
     </modules>
 
     <properties>

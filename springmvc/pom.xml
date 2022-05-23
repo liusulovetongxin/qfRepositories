@@ -16,6 +16,10 @@
         <module>05springmvcdata</module>
         <module>06springmvcjson</module>
         <module>07springmvcex</module>
+        <module>08springmvcintercepter</module>
+        <module>09fileuplocadanddownload</module>
+        <module>10springmvcrest</module>
+        <module>11SSM</module>
 
 
     </modules>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--
+    包扫描
+    -->
+
+    <context:component-scan base-package="com.qf"/>
+    <!--
+    注解驱动
+    -->
+    <mvc:annotation-driven>
+        <!--
+        如果返回的body乱码,通过给消息设置转换器的字符集即可
+        -->
+        <mvc:message-converters>
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <property name="defaultCharset" value="UTF-8"/>
+            </bean>
+        </mvc:message-converters>
+
+    </mvc:annotation-driven>
+    <!--
+    静态资源文件
+    -->
+    <mvc:default-servlet-handler/>
+
+<!--配置一个上传文件的解析器 id必须叫multipartResolver-->
+    <bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver" id="multipartResolver">
+<!--可以设置限制的大小 单位是字节-->
+        <property name="maxUploadSize" value="123456789"/>
+        <property name="maxUploadSizePerFile" value="1234567"/>
+    </bean>
+</beans>

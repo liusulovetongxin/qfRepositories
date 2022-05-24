@@ -20,6 +20,7 @@
         <module>09fileuplocadanddownload</module>
         <module>10springmvcrest</module>
         <module>11SSM</module>
+        <module>12ssmdemo</module>
 
 
     </modules>

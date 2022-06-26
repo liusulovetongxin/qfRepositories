@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    username: root
+    password: root
+    url: jdbc:mysql:///springbootredisnegix?useUnicode=true&useSSL=false&characterEncoding=UTF8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  redis:
+    host: 172.20.57.211
+    port: 6379
+    password: 123456
+server:
+  port: 8086

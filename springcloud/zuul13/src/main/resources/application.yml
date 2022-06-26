@@ -1,0 +1,26 @@
+server:
+  port: 14000
+spring:
+  application:
+    name: zuul13
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone : http://localhost:10000/eureka/
+zuul:
+#  routes:
+#    orderprovideropenfeginhystrix12: /orders/**   #orderprovideropenfeginhystrix12被映射到/orders/** 即是访问orders/**就可以访问此服务
+  routes:
+    orders:   # 这是一个id，随便写，但是唯一
+      path: /dingdan/**
+      serviceId: orderprovideropenfeginhystrix12
+  ignored-services:
+    - orderprovideropenfeginhystrix12  #被忽略的只能手动别名才能访问，正常不能访问了
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - "*"   #  "*" 代表开启所有的路由

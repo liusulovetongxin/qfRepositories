@@ -1,0 +1,17 @@
+server:
+  port: 12001
+spring:
+  application:
+    name: orderprovideropenfeginhystrix12
+  cloud:
+    inetutils:
+      ignored-interfaces: ['virtual.*']
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone : http://localhost:10000/eureka/
+feign:
+  hystrix:
+    enabled: true

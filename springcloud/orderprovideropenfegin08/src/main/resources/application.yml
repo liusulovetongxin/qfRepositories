@@ -1,0 +1,14 @@
+server:
+  port: 12001
+spring:
+  application:
+    name: orderprivader05
+  cloud:
+    inetutils:
+      ignored-interfaces: ['virtual.*']
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone : http://localhost:10000/eureka/

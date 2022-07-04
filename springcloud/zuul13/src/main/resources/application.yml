@@ -16,8 +16,13 @@ zuul:
     orders:   # 这是一个id，随便写，但是唯一
       path: /dingdan/**
       serviceId: orderprovideropenfeginhystrix12
+    dizhi:
+      path: /address/**
+      serviceId: orderprovideropenfeginhystrix12
+      stripPrefix: true
   ignored-services:
     - orderprovideropenfeginhystrix12  #被忽略的只能手动别名才能访问，正常不能访问了
+  prefix: /api   #前缀
 management:
   endpoints:
     web:

@@ -3,47 +3,29 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.qf</groupId>
+    <artifactId>springcloudtrymerging</artifactId>
     <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
     <modules>
-        <module>addressprovider01</module>
-        <module>addressprovider04</module>
-        <module>orderprovider02</module>
-        <module>orderprovider05</module>
-        <module>orderprovider07</module>
-        <module>eurekaserver03</module>
-        <module>eurekaserver06</module>
-        <module>orderprovideropenfegin08</module>
-        <module>addressproviderhystrix10</module>
-        <module>orderproviderHystrix11</module>
-        <module>orderprovideropenfeginhystrix12</module>
-        <module>zuul13</module>
-        <module>zuul14-reg</module>
-        <module>zuul15fallbackandfilter</module>
-        <module>configserver16</module>
-        <module>addressproviderhystrixconfigclient17</module>
-        <module>streamoutput18</module>
-        <module>streaminput19</module>
-        <module>addressproviderconsul22</module>
-        <module>orderprovideropenfeginconsul23</module>
-
+        <module>eurekaserver</module>
+        <module>configserver</module>
+        <module>personclient</module>
+        <module>orderclient</module>
+        <module>zuul</module>
     </modules>
-
     <parent>
         <artifactId>spring-boot-starter-parent</artifactId>
         <groupId>org.springframework.boot</groupId>
         <version>2.3.12.RELEASE</version>
     </parent>
-    <groupId>com.qf</groupId>
-    <artifactId>springcloud</artifactId>
-    <version>1.0-SNAPSHOT</version>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
-
     <dependencies>
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -62,4 +44,5 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
 </project>

@@ -1,0 +1,15 @@
+spring:
+  rabbitmq:
+    listener:
+      simple:
+        acknowledge-mode: MANUAL
+        prefetch: 1
+    username: guest
+    password: guest
+    host: 192.168.248.34
+    port: 5672
+    virtual-host: /test
+    publisher-confirm-type: simple
+    publisher-returns: true
+server:
+  port: 10000

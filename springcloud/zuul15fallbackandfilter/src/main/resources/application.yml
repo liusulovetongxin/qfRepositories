@@ -1,0 +1,16 @@
+server:
+  port: 14000
+spring:
+  application:
+    name: zuul15
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone : http://localhost:10000/eureka
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

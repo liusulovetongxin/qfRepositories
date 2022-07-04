@@ -1,12 +1,17 @@
 server:
-  port: 11001
-
+  port: 14000
+spring:
+  application:
+    name: zuul13
 eureka:
   instance:
     prefer-ip-address: true
   client:
     service-url:
       defaultZone : http://localhost:10000/eureka/
-spring:
-  application:
-    name: addressproviderhystrix10
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

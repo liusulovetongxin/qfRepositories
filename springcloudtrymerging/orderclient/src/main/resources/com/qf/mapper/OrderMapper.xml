@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qf.mapper.OrderMapper">
+
+
+	<insert id="addOrder">
+		insert into tblorder
+			values(null,#{orderName},#{price},#{pid},#{time})
+	</insert>
+
+
+
+	<select id="findByOrderId" resultType="com.qf.pojo.Order">
+		select * from tblorder where order_id = #{orderId}
+	</select>
+	<select id="findByPid" resultType="com.qf.pojo.Order">
+		select * from tblorder where pid = #{pid}
+	</select>
+</mapper>

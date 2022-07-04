@@ -1,0 +1,14 @@
+elasticjob:
+  reg-center:
+    server-lists: 10.9.12.200:9096
+    namespace: testelasticjob
+    max-sleep-time-milliseconds: 8000
+    max-retries: 5
+  jobs:
+    suibianxie:
+      elastic-job-class: com.qf.task.job1
+      sharding-total-count: 4 #当前任务总共划分为几份同时执行
+      sharding-item-parameters: 0=caoxian,1=gansu,2=chenyihan,3=goubao #给每一个分片指定一个参数名
+      cron: 0/10 * * * * ?
+      overwrite: true #在当前属性设置为true的情况下,上面的配置可以进行修改,重启后会生效,否则需要先从zk中删除对应的配置后才生效
+

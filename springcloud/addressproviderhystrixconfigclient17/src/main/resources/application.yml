@@ -1,0 +1,7 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh,info,health,bus-refresh #打开刷新的接口,允许刷新配置,需要导入依赖包
+
+

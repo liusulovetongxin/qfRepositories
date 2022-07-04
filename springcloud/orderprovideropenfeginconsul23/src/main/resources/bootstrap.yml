@@ -1,0 +1,43 @@
+spring:
+  application:
+    name: orderprovideropenfeginconsul23
+  cloud:
+    inetutils:
+      ignored-interfaces: [ 'VMware.*' ]  #忽略以VMware开头的网卡,这样虚拟机的网络不会注册到注册中心,防止其他人无法访问
+    consul:
+      host: localhost #consule注册中心地址
+      port: 8500 #consule注册中心端口
+      discovery: #下面的部分是consul的配置,很多配置本身就是默认值,只是介绍下
+        heartbeat:
+          enabled: true #开启心跳检查
+        enabled: true #开启服务发现
+        # 启用服务注册,默认就是true
+        register: true
+        # 服务停止时取消注册
+        deregister: true
+        # 表示注册时使用IP而不是hostname
+        prefer-ip-address: true
+        # 执行监控检查的频率
+        health-check-interval: 30s
+        # 设置健康检查失败多长时间后，取消注册
+        health-check-critical-timeout: 30s
+        # 健康检查的路径
+        health-check-path: /actuator/health
+        # 服务注册标识，格式为：应用名称+服务器IP+端口
+        instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
+      #  service-name: ${spring.application.name} #和上面的id二选一即可
+      config:
+        enabled: true   #默认是true --
+        format: YAML    # 表示consul上面文件的格式 有四种 YAML PROPERTIES KEY-VALUE FILES
+        #data-key: configuration    #表示consul上面的KEY值(或者说文件的名字) 默认是data
+        data-key: data    #表示consul上面的KEY值(或者说文件的名字) 默认是data
+        #prefixes: config #设置配置值的基本文件夹,默认所有的服务的配置都放在config中
+        #defaultContext # 设置所有应用程序使用的文件夹名称,默认和服务名字一样,
+        #profileSeparator 设置用于使用配置文件在属性源中分隔配置文件名称的分隔符的值,比如xxx-dev.yml这种样子, 可以获取${spring.profiles.active}
+        # 如果配置了上面的值,最终找的位置就是prefixes/defaultContext-profileSeparator/这个目录下的data-key配置
+        # watch选项为配置监视功能，主要监视配置的改变
+        watch:
+          enabled: true
+          delay: 1000
+          wait-time: 30
+

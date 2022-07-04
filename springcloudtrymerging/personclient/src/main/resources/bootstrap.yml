@@ -1,0 +1,17 @@
+server:
+  port: 11001
+eureka:
+
+  client:
+    service-url:
+      defaultZone: http://localhost:10000/eureka
+spring:
+  application:
+    name: personclient
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: configserver
+  profiles:
+    active: dev

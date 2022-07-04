@@ -8,5 +8,13 @@ eureka:
     service-url:
       defaultZone : http://localhost:10000/eureka/
 spring:
+  profiles:
+    active: dev
   application:
-    name: addressproviderhystrix10
+    name: addressproviderhystrixconfigclient17
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: configserver16
+

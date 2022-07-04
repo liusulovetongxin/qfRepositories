@@ -1,0 +1,20 @@
+server:
+  port: 12000
+spring:
+  application:
+    name: zuul
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: configserver
+  profiles:
+    active: dev
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://localhost:10000/eureka
+
+

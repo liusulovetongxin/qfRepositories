@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: 18streamoutput
+  rabbitmq:
+    password: guest
+    username: guest
+    host: rabbitmq.qfjava.cn
+    port: 9090
+server:
+  port: 21000

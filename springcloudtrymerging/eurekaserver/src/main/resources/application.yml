@@ -1,0 +1,11 @@
+server:
+  port: 10000
+eureka:
+  client:
+    register-with-eureka: false  # 是否注册到其他的eureka
+    fetch-registry: false   # 是否从其他的eureka同步数据
+    service-url:
+      defaultZone: http://localhost:10000/eureka
+      # eureka注册地址，其他的程序需要从这个地址来注册
+#      region: 北京
+

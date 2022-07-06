@@ -1,3 +1,5 @@
+package com.qf.classExample;
+
 import java.io.RandomAccessFile;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;

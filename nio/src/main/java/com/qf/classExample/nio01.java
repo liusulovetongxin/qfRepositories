@@ -1,3 +1,5 @@
+package com.qf.classExample;
+
 import java.nio.IntBuffer;
 
 /**

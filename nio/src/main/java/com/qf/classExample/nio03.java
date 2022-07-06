@@ -1,3 +1,5 @@
+package com.qf.classExample;
+
 import java.io.FileOutputStream;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
